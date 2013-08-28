@@ -1,0 +1,18 @@
+PATH
+  remote: .
+  specs:
+    mac_address (0.0.1)
+      str_quote
+
+GEM
+  remote: http://rubygems.org/
+  specs:
+    rake (10.1.0)
+    str_quote (0.0.1)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  mac_address!
+  rake
