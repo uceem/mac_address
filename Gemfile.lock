@@ -1,14 +1,14 @@
 PATH
   remote: .
   specs:
-    mac_address (0.0.1)
+    mac_address (0.0.2)
       str_quote
 
 GEM
   remote: http://rubygems.org/
   specs:
     rake (10.1.0)
-    str_quote (0.0.1)
+    str_quote (0.0.2)
 
 PLATFORMS
   ruby
