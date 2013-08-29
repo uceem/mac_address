@@ -12,6 +12,7 @@ Gem::Specification.new do |s|
   s.homepage    = "https://github.com/uceem/mac_address"
   s.summary     = "Mac address manipulation"
   s.description = "Parse, validate, convert mac addresses, and String methods"
+  s.license     = "MIT"
 
   s.files = Dir["{app,config,db,lib}/**/*"] + ["Rakefile", "README.md", "LICENSE"]
   s.test_files = Dir["test/**/*"]
