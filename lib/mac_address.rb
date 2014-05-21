@@ -9,7 +9,7 @@ class MacAddress
       @mac_str = @mac_str.split(':')[0]
     end
     @mac_str = @mac_str.downcase.gsub(/^0[xX]/,'').gsub(/[^0-9a-f]/,'')
-    
+
     raise ArgumentError.new("Invalid MAC address: #{str}") if @mac_str.length != 12
   end
   def to_s
@@ -24,14 +24,15 @@ class String
   def to_mac
     MacAddress.new(self).to_s
   end
-  
-  def valid_mac?
-    begin
+
+  def valid_mac?(options = {})
+    if options[:strict]
+      !!(self =~ /^([0-9a-fA-F]{2}[:-]){5}[0-9a-fA-F]{2}$/i)
+    else
       MacAddress.new(self).to_s
-    rescue ArgumentError => e
-      return false
+      true
     end
-    
-    true
+  rescue ArgumentError
+    false
   end
 end
