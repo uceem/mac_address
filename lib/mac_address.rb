@@ -54,6 +54,6 @@ class String
   end
 
   def valid_mac?(options = {})
-    options[:strict] ? MacAddress.validate_strict(self) : MacAddress.validate(self)
+    MacAddress.validate(self, options)
   end
 end
