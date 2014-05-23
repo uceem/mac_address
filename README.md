@@ -26,8 +26,6 @@ $ gem install mac_address
 
 ## Usage
 
-### MacAddress
-
 ```ruby
 MacAddress.new("aa:bb:cc:dd:ee:ff")
 # => #<MacAddress:0x007fe783981788 @mac_str="aabbccddeeff">
@@ -37,7 +35,7 @@ MacAddress.new("invalid mac")            # => Raises ArgumentError
 MacAddress.new("aa:bb:cc:dd:ee:ff").to_i # => 187723572702975
 ```
 
-The MacAddress class will also remove any cruft or extraneous contents. If there's a mac to be found, MacAddress will find it:
+The MacAddress class will also remove any cruft or extraneous content. If there's a mac to be found, MacAddress will find it:
 
 ```ruby
 MacAddress.new("aa:bb:cc:dd:ee:ff:qqqqq")
