@@ -2,8 +2,13 @@ require 'str_quote'
 require 'mac_address/version'
 
 class MacAddress
-  def initialize(str)
+  def initialize(str, options = {})
     @mac_str = str.strip.dequote.strip
+
+    if options[:strict] && !MacAddress.validate_strict(@mac_str)
+      raise_argument_error(@mac_str)
+    end
+
     n = @mac_str.index(':')
     if not n.nil? and n >= 12
       @mac_str = @mac_str.split(':')[0]
@@ -25,24 +30,30 @@ class MacAddress
     !!(mac =~ /^([0-9a-fA-F]{2}[:-]){5}[0-9a-fA-F]{2}$/i)
   end
 
-  def self.validate(mac)
-    MacAddress.new(mac).to_s
-    true
+  def self.validate(mac, options = {})
+    if options[:strict]
+      MacAddress.validate_strict(mac)
+    else
+      MacAddress.new(mac).to_s
+      true
+    end
   rescue ArgumentError
     false
+  end
+
+private
+
+  def raise_argument_error(mac_str, error_str = nil)
+    raise ArgumentError.new(error_str || "Invalid MAC address: #{mac_str}")
   end
 end
 
 class String
-  def to_mac
-    MacAddress.new(self).to_s
+  def to_mac(options = {})
+    MacAddress.new(self, options).to_s
   end
 
   def valid_mac?(options = {})
-    if options[:strict]
-      MacAddress.validate_strict(self)
-    else
-      MacAddress.validate(self)
-    end
+    options[:strict] ? MacAddress.validate_strict(self) : MacAddress.validate(self)
   end
 end
